@@ -138,6 +138,10 @@ def webhook():
         conn.close()
 
         override = CONFIG.get("series_settings", {}).get(series)
+        if not override:
+            # Try case-insensitive match
+            override = next((v for k, v in CONFIG.get("series_settings", {}).items() if k.lower() == series.lower()), None)
+
         if override:
             logging.info(f"[Config] Override found for '{series}': {override}")
         else:
