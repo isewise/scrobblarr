@@ -137,6 +137,7 @@ def webhook():
         conn.commit()
         conn.close()
 
+        series = series.strip()  # Remove leading and trailing whitespace
         override = CONFIG.get("series_settings", {}).get(series)
         if not override:
             # Try case-insensitive match
