@@ -76,6 +76,21 @@ The application uses a SQLite database (`watched.db`) to store scrobbling data. 
 
 Logs are printed to the console with different levels (INFO, WARNING, ERROR) to help monitor the application's behavior.
 
+## Hot Reloading Configuration
+
+Scrobblarr supports hot reloading of the `config.json` file. This means that any changes made to the configuration file will be automatically detected and applied without needing to restart the application.
+
+### How It Works
+
+- The application continuously monitors the `config.json` file for changes.
+- When a change is detected, the configuration is reloaded, and the new settings are applied immediately.
+- This allows you to update settings such as Sonarr integration, grace days, or series-specific overrides on the fly.
+
+### Benefits
+
+- No downtime required for configuration updates.
+- Simplifies the process of fine-tuning application behavior.
+
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
