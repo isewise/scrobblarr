@@ -79,3 +79,9 @@ Logs are printed to the console with different levels (INFO, WARNING, ERROR) to 
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Docker Hub
+
+The Docker image for Scrobblarr is available on Docker Hub. You can find it here:
+
+[Scrobblarr on Docker Hub](https://hub.docker.com/r/ibooker88/scrobblarr)
