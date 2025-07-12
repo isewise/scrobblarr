@@ -45,6 +45,8 @@ Scrobblarr is a Flask-based application designed to handle media scrobbling even
        container_name: scrobblarr
        ports:
          - "5000:5000"
+       environment:
+         - TIMEZONE=America/New_York
        volumes:
          - ./config.json:/app/config.json
        restart: unless-stopped
