@@ -6,10 +6,49 @@ import sqlite3
 import logging
 from flask import Flask, request
 import requests
-from datetime import datetime
+from zoneinfo import ZoneInfo
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(message)s')
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+
+class TimezoneFormatter(logging.Formatter):
+    """
+    Custom logging formatter that formats log timestamps in a specified timezone.
+
+    Args:
+        fmt (str): Log message format string.
+        datefmt (str): Date/time format string.
+        tz (zoneinfo.ZoneInfo): Cached timezone object to use for formatting timestamps. Pass a reused instance for efficiency.
+
+    Usage:
+def get_timezone():
+def get_timezone():
+    """
+    Retrieves the timezone specified by the TIMEZONE environment variable, or defaults to UTC if not set or invalid.
+
+    Returns:
+        ZoneInfo: The ZoneInfo object for the specified timezone, or UTC if the timezone is invalid or not set.
+
+    If the specified timezone is invalid, a warning is logged and UTC is returned.
+    """
+    tz_name = os.getenv("TIMEZONE", "UTC")
+    try:
+        return ZoneInfo(tz_name)
+    except Exception:
+        logging.warning(f"[Config] Unknown timezone: {tz_name}, defaulting to UTC")
+        return ZoneInfo("UTC")
+CACHED_TZ = get_timezone()
+
+# Update logging configuration
+timezone_formatter = TimezoneFormatter(fmt='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S', tz=CACHED_TZ)
+logger = logging.getLogger()
+if logger.handlers:
+    for handler in logger.handlers:
+        handler.setFormatter(timezone_formatter)
+else:
+    handler = logging.StreamHandler()
+    handler.setFormatter(timezone_formatter)
+    logger.addHandler(handler)
 
 # Constants
 DB_PATH = "watched.db"
