@@ -19,9 +19,8 @@ class TimezoneFormatter(logging.Formatter):
         fmt (str): Log message format string.
         datefmt (str): Date/time format string.
         tz (zoneinfo.ZoneInfo): Cached timezone object to use for formatting timestamps. Pass a reused instance for efficiency.
+    """
 
-    Usage:
-def get_timezone():
 def get_timezone():
     """
     Retrieves the timezone specified by the TIMEZONE environment variable, or defaults to UTC if not set or invalid.
