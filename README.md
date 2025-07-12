@@ -1,6 +1,6 @@
 # Scrobblarr
 
-Scrobblarr is a Flask-based application designed to handle media scrobbling events and interact with Sonarr for managing TV series episodes. It listens for webhook events, processes them, and performs actions such as deleting or unmonitoring episodes based on the configuration.
+Scrobblarr is a Flask-based application designed to handle media scrobbling events and interact with Sonarr for managing TV series episodes. It listens for Plex webhook events, processes them, and performs actions such as deleting or unmonitoring episodes based on the configuration.
 
 ## Features
 
@@ -11,6 +11,8 @@ Scrobblarr is a Flask-based application designed to handle media scrobbling even
 
 ## Requirements
 
+- Plex
+- Sonarr
 - Docker
 - Docker Compose
 
