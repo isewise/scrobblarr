@@ -7,6 +7,7 @@ import logging
 from flask import Flask, request
 import requests
 from zoneinfo import ZoneInfo
+from datetime import datetime
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
@@ -20,6 +21,13 @@ class TimezoneFormatter(logging.Formatter):
         datefmt (str): Date/time format string.
         tz (zoneinfo.ZoneInfo): Cached timezone object to use for formatting timestamps. Pass a reused instance for efficiency.
     """
+    def __init__(self, fmt=None, datefmt=None, tz=None):
+        super().__init__(fmt, datefmt)
+        self.tz = tz
+
+    def formatTime(self, record, datefmt=None):
+        dt = datetime.fromtimestamp(record.created, tz=self.tz)
+        return dt.strftime(datefmt or self.default_time_format)
 
 def get_timezone():
     """
